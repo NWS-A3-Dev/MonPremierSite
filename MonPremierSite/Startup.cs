@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace MonPremierSite
 {
@@ -26,6 +27,14 @@ namespace MonPremierSite
             IMvcBuilder mvcBuilder = services.AddControllersWithViews();
 
             mvcBuilder.AddRazorRuntimeCompilation();
+
+            services.AddSingleton(i =>
+            {
+                WebsiteContext ctx = new WebsiteContext();
+
+                ctx.Database.Migrate();
+                return (ctx);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,9 +10,9 @@ namespace MonPremierSite.Controllers
     [Route("[Controller]/")]
     public class CarabistouilleController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(WebsiteContext ctx)
         {
-            return View();
+            return View("Index", ctx.Users.First());
         }
 
         [HttpGet("{id}/{machin}")]
